@@ -26,6 +26,7 @@ cp -v etc/* /tmp/rootfs/etc
 
 echo "Rebuilding the tar file"
 rm -f  artifacts/debian_12_slim.tar.gz
-tar -C /tmp/rootfs -czf artifacts/debian_12_slim.tar.gz .
-du -sh artifacts/debian_12_slim.tar.gz
+tar -C /tmp/rootfs -czvf artifacts/debian_12_slim.tar.gz .
+du -sh artifacts/*
+md5sum artifacts/*
 
