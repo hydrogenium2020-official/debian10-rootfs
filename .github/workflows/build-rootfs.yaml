@@ -12,7 +12,7 @@ jobs:
 
       - name: Get the short version of the last commit
         id: vars
-        run: echo "tag_name=$(date +"%Y.%m.%d.").$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        run: echo "tag_name=$(date +"%Y.%m.%d").$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Create the rootfs
         run: |
