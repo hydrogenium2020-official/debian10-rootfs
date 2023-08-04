@@ -2,22 +2,19 @@ name: Publish GitHub release
 on: [push]
 
 jobs:
-  update_file:
+  build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Update File
-        run: sh ${{ github.workspace }}/build-rootfs.sh
-
-      - name: Commit and Push Changes
+      - name: Checkout main
+        uses: actions/checkout@v3
+      - name: Create the rootfs
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add -f artifacts/debian_12_slim.tar.gz
-          git commit -am "Update file via GitHub Action"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          sh ${{ github.workspace }}/build-rootfs.sh
+
+      - name: Create the GH release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ github.workspace }}/artifacts/*
+          tag_name: ${{ github.sha }}
