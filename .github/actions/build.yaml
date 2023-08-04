@@ -1,0 +1,20 @@
+jobs:
+  update_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update File
+        run: scripts/build.sh
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f artifacts/debian_12_slim.tar.gz
+          git commit -am "Update file via GitHub Action"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
