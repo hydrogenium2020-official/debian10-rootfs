@@ -1,3 +1,6 @@
+name: Publish GitHub release
+on: [push]
+
 jobs:
   update_file:
     runs-on: ubuntu-latest
