@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Update File
-        run: build-rootfs.sh
+        run: sh ${{ github.workspace }}/build/build.sh
 
       - name: Commit and Push Changes
         run: |
