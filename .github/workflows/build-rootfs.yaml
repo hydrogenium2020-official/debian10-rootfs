@@ -16,7 +16,7 @@ jobs:
 
 
       - name: Install proot
-        run: sudo apt-get proot -y
+        run: sudo apt-get install proot -y
 
       - name: Create the rootfs
         run: |
