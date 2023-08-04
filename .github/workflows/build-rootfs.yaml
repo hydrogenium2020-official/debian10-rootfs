@@ -12,7 +12,7 @@ jobs:
 
       - name: Get the short version of the last commit
         id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        run: echo "tag_name=$(date +"%Y.%m.%d.").$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Create the rootfs
         run: |
@@ -22,7 +22,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ${{ github.workspace }}/artifacts/*
-          tag_name: ${{ steps.vars.outputs.sha_short }}
+          tag_name: ${{ steps.vars.outputs.tag_name }}
           # Get the short commit hash
           body: ${{ github.sha }}
 
