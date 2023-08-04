@@ -20,13 +20,7 @@ docker export -o artifacts/debian_12_slim.tar devex
 rm -rf /tmp/rootfs && mkdir -p /tmp/rootfs
 tar -C /tmp/rootfs -xf artifacts/debian_12_slim.tar
 
-echo "Adding the DevEx User"
-proot -b $(pwd) -r /tmp/rootfs useradd -m  devex
-cp -v etc/* /tmp/rootfs/etc
-
-echo "Rebuilding the tar file"
 rm -f  artifacts/debian_12_slim.tar.gz
-tar -C /tmp/rootfs -czvf artifacts/debian_12_slim.tar.gz .
+gzip -9 -n -v -S .gz artifacts/debian_12_slim.tar
 du -sh artifacts/*
-md5sum artifacts/*
 
