@@ -26,7 +26,7 @@ if ! echo "$new_id" | grep -q "^sha256:"; then
 fi
 
 last_id="blablabh"
-[[ "$last_id" == "$new_id" ]] && echo "OK: There is no new image available" && exit 1
+[[ "$last_id" == "$new_id" ]] && echo "SKIP rebuild because image did not change" && exit 0
 
-echo "REBUILD: There is a new image available"
+echo "A rebuild is needed because there is an image update"
 exit 0
