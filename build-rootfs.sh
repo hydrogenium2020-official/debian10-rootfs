@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-BASE_IMAGE=debian:12-slim
+source config/base.sh
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
