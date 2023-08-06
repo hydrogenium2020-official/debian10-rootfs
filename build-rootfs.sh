@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
 
 source config/base.sh
@@ -19,12 +19,13 @@ docker run \
     --name kindos \
     -v $(pwd):/build \
     $BASE_IMAGE \
-    /build/provision/provision.sh
+    /build/scripts/provision.sh
 echo "Exporting the tar file"
 docker export -o artifacts/debian_12_slim.tar kindos
 
 
 rm -f  artifacts/debian_12_slim.tar.gz
 gzip -9 -n -v -S .gz artifacts/debian_12_slim.tar
+sha256 artifacts/debian_12_slim.tar.gz > artifacts/debian_12_slim.tar.gz.sha256
 du -sh artifacts/*
 

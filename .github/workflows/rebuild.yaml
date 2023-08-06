@@ -2,7 +2,9 @@ name: Publish GitHub release
 on: [push]
 
 jobs:
-  build:
+   
+
+  rebuild:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -14,14 +16,14 @@ jobs:
         id: vars
         run: echo "tag_name=$(date +"%Y.%m.%d").$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Check if the image needs update
-        id: needs_update
-        run: ${{ github.workspace }}/scripts/check-for-update.sh
-
       - name: Create the rootfs
         if: contains(steps.needs_update.outputs.stdout, 'rebuild is needed')
         run: |
           ${{ github.workspace }}/build-rootfs.sh
+
+      - name: Get the short version of the last commit
+        id: vars
+        run: echo "tag_name=$(cat artifacts/debian_12_slim.tar.gz.sha256|cut -c 1-8)" >> $GITHUB_OUTPUT
 
       - name: Create the GH release
         if: contains(steps.needs_update.outputs.stdout, 'rebuild is needed')
