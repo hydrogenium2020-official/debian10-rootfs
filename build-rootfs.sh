@@ -10,6 +10,10 @@ mkdir -p artifacts
 docker rm kindos 2>/dev/null|| true
 
 echo "Starting docker container to build rootfs"
+
+docker pull $BASE_IMAGE
+docker inspect $BASE_IMAGE > artifacts/debian_12_slim.json
+
 docker run \
     -v ${SCRIPT_DIR}:/build \
     --name kindos \
