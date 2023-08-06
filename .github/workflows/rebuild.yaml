@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create the rootfs
-        if: contains(steps.needs_update.outputs.stdout, 'rebuild is needed')
         run: ${{ github.workspace }}/build-rootfs.sh
 
       - name: Get the short version of the last commit
