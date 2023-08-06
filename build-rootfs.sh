@@ -15,7 +15,7 @@ docker run \
     --name kindos \
     -v $(pwd):/build \
     $BASE_IMAGE \
-    /build/provision.sh
+    /build/provision/provision.sh
 echo "Exporting the tar file"
 docker export -o artifacts/debian_12_slim.tar kindos
 

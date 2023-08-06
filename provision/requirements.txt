@@ -1,0 +1,8 @@
+# Needed for the profile installer
+curl
+# Enable customization
+sudo
+# Enable vscode remote out of the box
+wget                    
+# Default developer experience
+git openssh-client      
