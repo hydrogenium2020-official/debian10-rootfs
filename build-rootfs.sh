@@ -23,9 +23,11 @@ docker run \
 echo "Exporting the tar file"
 docker export -o artifacts/debian_12_slim.tar kindos
 
-
 rm -f  artifacts/debian_12_slim.tar.gz
 gzip -9 -n -v -S .gz artifacts/debian_12_slim.tar
-sha256 artifacts/debian_12_slim.tar.gz > artifacts/debian_12_slim.tar.gz.sha256
+
+sha256sum artifacts/debian_12_slim.tar.gz > artifacts/debian_12_slim.tar.gz.sha256
+tar tvf artifacts/debian_12_slim.tar.gz >  artifacts/filelist.txt
+
 du -sh artifacts/*
 
