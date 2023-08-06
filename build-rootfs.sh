@@ -7,18 +7,18 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
 rm -f /tmp/debian_12_slim.tar.gz
 mkdir -p artifacts
-docker rm devex 2>/dev/null|| true
+docker rm kindos 2>/dev/null|| true
 
 echo "Starting docker container to build rootfs"
 docker run \
     -v ${SCRIPT_DIR}:/build \
-    --name devex \
-    $BASE_IMAGE
+    --name kindos \
+    -v $(pwd):/build \
+    $BASE_IMAGE \
+    /build/provision.sh
 echo "Exporting the tar file"
-docker export -o artifacts/debian_12_slim.tar devex
+docker export -o artifacts/debian_12_slim.tar kindos
 
-rm -rf /tmp/rootfs && mkdir -p /tmp/rootfs
-tar -C /tmp/rootfs -xf artifacts/debian_12_slim.tar
 
 rm -f  artifacts/debian_12_slim.tar.gz
 gzip -9 -n -v -S .gz artifacts/debian_12_slim.tar
