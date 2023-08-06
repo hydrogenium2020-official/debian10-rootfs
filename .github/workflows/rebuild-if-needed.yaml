@@ -14,10 +14,9 @@ jobs:
         id: vars
         run: echo "tag_name=$(date +"%Y.%m.%d").$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
-      steps:
-        - name: Check if the image needs update
-          id: needs_update
-          run: sh ${{ github.workspace }}/scripts/needs-update.sh
+      - name: Check if the image needs update
+        id: needs_update
+        run: sh ${{ github.workspace }}/scripts/needs-update.sh
 
       - name: Create the rootfs
         if: steps.needs_update.outputs.exit_code == 0
