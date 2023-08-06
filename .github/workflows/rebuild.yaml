@@ -12,10 +12,6 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v3
 
-      - name: Get the short version of the last commit
-        id: vars
-        run: echo "tag_name=$(date +"%Y.%m.%d").$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
       - name: Create the rootfs
         if: contains(steps.needs_update.outputs.stdout, 'rebuild is needed')
         run: |
