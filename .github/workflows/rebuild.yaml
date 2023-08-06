@@ -22,7 +22,6 @@ jobs:
         run: echo "tag_name=$(cat artifacts/debian_12_slim.tar.gz.sha256|cut -c 1-8)" >> $GITHUB_OUTPUT
 
       - name: Create the GH release
-        if: contains(steps.needs_update.outputs.stdout, 'rebuild is needed')
         uses: softprops/action-gh-release@v1
         with:
           files: ${{ github.workspace }}/artifacts/*
