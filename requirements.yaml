@@ -1,0 +1,5 @@
+
+kind: posix
+list:
+  - docker
+  - proot
