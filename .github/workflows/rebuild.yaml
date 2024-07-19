@@ -25,5 +25,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ${{ github.workspace }}/artifacts/*
-          tag_name: ${{ steps.vars.outputs.tag_name }}
+          tag_name: 10
 
