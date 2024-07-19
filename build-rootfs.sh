@@ -5,14 +5,14 @@ source config/base.sh
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
-rm -f /tmp/debian_12_slim.tar.gz
+rm -f /tmp/debian_10_slim.tar.gz
 mkdir -p artifacts
 docker rm kindos 2>/dev/null|| true
 
 echo "Starting docker container to build rootfs"
 
 docker pull $BASE_IMAGE
-docker inspect $BASE_IMAGE > artifacts/debian_12_slim.json
+docker inspect $BASE_IMAGE > artifacts/debian_10_slim.json
 
 docker run \
     -v ${SCRIPT_DIR}:/build \
@@ -22,14 +22,14 @@ docker run \
     /build/scripts/provision.sh
 
 echo "Exporting the tar file"
-docker export -o artifacts/debian_12_slim.tar kindos
+docker export -o artifacts/debian_10_slim.tar kindos
 
-rm -f  artifacts/debian_12_slim.tar.gz
+rm -f  artifacts/debian_10_slim.tar.gz
 echo "Compressing the tar file"
-gzip -9 -n -v -S .gz artifacts/debian_12_slim.tar
+gzip -9 -n -v -S .gz artifacts/debian_10_slim.tar
 
-sha256sum artifacts/debian_12_slim.tar.gz > artifacts/debian_12_slim.tar.gz.sha256
-tar tvf artifacts/debian_12_slim.tar.gz >  artifacts/filelist.txt
+sha256sum artifacts/debian_10_slim.tar.gz > artifacts/debian_10_slim.tar.gz.sha256
+tar tvf artifacts/debian_10_slim.tar.gz >  artifacts/filelist.txt
 
 du -sh artifacts/*
 
