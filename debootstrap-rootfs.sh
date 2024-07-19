@@ -17,7 +17,7 @@ if [[ $# -gt 0 ]] && [[ $1 == "--force" ]]; then
     rm -rf $DebootstrapDir
 fi
 
-[[ ! -d $DebootstrapDir ]]  && debootstrap --variant=minbase --arch amd64 bookworm $DebootstrapDir http://deb.debian.org/debian/
+[[ ! -d $DebootstrapDir ]]  && debootstrap --variant=minbase --arch amd64 buster $DebootstrapDir https://archive.debian.org/debian/
 
 
 proot -0 -w / \
@@ -29,7 +29,7 @@ proot -0 -w / \
 # Remove the apt cache
 rm -rf $DebootstrapDir/var/cache/apt/*
 
-tar -C $DebootstrapDir -c . | gzip -9 -n -v -S .gz > artifacts/debian_12_slim.tar.gz
+tar -C $DebootstrapDir -c . | gzip -9 -n -v -S .gz > artifacts/debian_10_slim.tar.gz
 
-du -sh artifacts/debian_12_slim.tar.gz
+du -sh artifacts/debian_10_slim.tar.gz
 
