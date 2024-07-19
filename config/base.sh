@@ -1,2 +1,2 @@
 
-export BASE_IMAGE=debian:12-slim
+export BASE_IMAGE=debian:10-slim
