@@ -25,7 +25,7 @@ echo "Exporting the tar file"
 docker export -o artifacts/debian_12_slim.tar kindos
 
 rm -f  artifacts/debian_12_slim.tar.gz
-echoo "Compressing the tar file"
+echo "Compressing the tar file"
 gzip -9 -n -v -S .gz artifacts/debian_12_slim.tar
 
 sha256sum artifacts/debian_12_slim.tar.gz > artifacts/debian_12_slim.tar.gz.sha256
